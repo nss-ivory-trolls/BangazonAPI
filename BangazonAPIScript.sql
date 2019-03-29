@@ -1,15 +1,15 @@
-DELETE FROM OrderProduct;
-DELETE FROM ComputerEmployee;
-DELETE FROM EmployeeTraining;
-DELETE FROM Employee;
-DELETE FROM TrainingProgram;
-DELETE FROM Computer;
-DELETE FROM Department;
-DELETE FROM [Order];
-DELETE FROM PaymentType;
-DELETE FROM Product;
-DELETE FROM ProductType;
-DELETE FROM Customer;
+--DELETE FROM OrderProduct;
+--DELETE FROM ComputerEmployee;
+--DELETE FROM EmployeeTraining;
+--DELETE FROM Employee;
+--DELETE FROM TrainingProgram;
+--DELETE FROM Computer;
+--DELETE FROM Department;
+--DELETE FROM [Order];
+--DELETE FROM PaymentType;
+--DELETE FROM Product;
+--DELETE FROM ProductType;
+--DELETE FROM Customer;
 
 
 ALTER TABLE Employee DROP CONSTRAINT [FK_EmployeeDepartment];
