@@ -160,7 +160,7 @@ insert into PaymentType (AcctNumber, [Name], CustomerId) values (3000, 'AmEx', 3
 
 insert into [Order] (CustomerId, PaymentTypeId) values (1, 1)
 insert into [Order] (CustomerId, PaymentTypeId) values (2, 2)
-insert into [Order] (CustomerId, PaymentTypeId) values (3, 3)
+insert into [Order] (CustomerId) values (3)
 
 insert into ProductType ([Name]) values ('Electronics')
 insert into ProductType ([Name]) values ('Sports Equipment')
@@ -183,5 +183,6 @@ insert into TrainingProgram ([Name], StartDate, EndDate, MaxAttendees) values ('
 insert into TrainingProgram ([Name], StartDate, EndDate, MaxAttendees) values ('How to Sell Beans', '14 Feb 2019', '15 Feb 2019', 10)
 
 insert into OrderProduct (OrderId, ProductId) values (1, 1)
+insert into OrderProduct (OrderId, ProductId) values (2, 2)
 insert into OrderProduct (OrderId, ProductId) values (2, 2)
 insert into OrderProduct (OrderId, ProductId) values (3, 3)
