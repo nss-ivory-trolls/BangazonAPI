@@ -38,9 +38,9 @@ namespace BangazonAPI.Controllers
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                    
-                        cmd.CommandText = $@"select o.Id as oId, op.Id as opId, p.Id as pId, c.Id as cId, o.CustomerId, o.PaymentTypeId, 
+                        cmd.CommandText = $@"select o.Id as oId, c.Id as cId, op.Id as opId, p.Id as pId, pt.Id as ptId, c.Id as cId, o.CustomerId, o.PaymentTypeId, 
                                             op.OrderId, op.productId, pt.[Name], pt.AcctNumber, p.Title, 
-                                            p.[Description], c.FirstName, c.LastName
+                                            p.[Description], c.FirstName, c.LastName, p.Price
                                             from [order] o
                                             left join paymentType pt on o.PaymentTypeId = pt.Id
                                             left join OrderProduct op on o.Id = op.OrderId
@@ -63,14 +63,14 @@ namespace BangazonAPI.Controllers
                                 CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId")),
                                 Customer = new Customer
                                 {
-                                    Id = reader.GetInt32(reader.GetOrdinal("CustomerId")),
+                                    Id = reader.GetInt32(reader.GetOrdinal("cId")),
                                     FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                                     LastName = reader.GetString(reader.GetOrdinal("LastName"))
                                 },
                                 PaymentTypeId = reader.GetInt32(reader.GetOrdinal("PaymentTypeId")),
                                 PaymentType = new PaymentType
                                 {
-                                    Id = reader.GetInt32(reader.GetOrdinal("PaymentTypeId")),
+                                    Id = reader.GetInt32(reader.GetOrdinal("ptId")),
                                     Name = reader.GetString(reader.GetOrdinal("Name")),
                                     AcctNumber = reader.GetInt32(reader.GetOrdinal("AcctNumber"))
                                 },
@@ -91,6 +91,7 @@ namespace BangazonAPI.Controllers
                                     Id = reader.GetInt32(reader.GetOrdinal("pId")),
                                     Title = reader.GetString(reader.GetOrdinal("Title")),
                                     Description = reader.GetString(reader.GetOrdinal("Description")),
+                                    Price = reader.GetInt32(reader.GetOrdinal("Price"))
                                 }
                             );                   
                         }
@@ -98,7 +99,7 @@ namespace BangazonAPI.Controllers
                     }
                     reader.Close();
 
-                    return Ok(orders);
+                    return Ok(orders.Values);
                 }
 
             }
