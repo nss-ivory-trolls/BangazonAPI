@@ -12,6 +12,6 @@ namespace BangazonAPI.Models
         public Employee Employee { get; set; }
         public int TrainingProgramId { get; set; }
         public TrainingProgram TrainingProgram { get; set; }
-        public List<Employee> EmployeeList { get; set; } = new List<Employee>();
+       
     }
 }
