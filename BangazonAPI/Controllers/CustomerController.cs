@@ -144,7 +144,7 @@ namespace BangazonAPI.Controllers
         }
 
         // GET: api/Customer/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetCustomer")]
         public async Task<IActionResult> Get(int id, string _include, string q)
         {
             using (SqlConnection conn = Connection)
@@ -263,20 +263,63 @@ namespace BangazonAPI.Controllers
         
         // POST: api/Customer
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] Customer newCustomer)
         {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @" INSERT INTO Customer (FirstName, LastName)
+                                         OUTPUT INSERTED.Id
+                                         Values(@FirstName, @LastName)";
+                    cmd.Parameters.Add(new SqlParameter("@FirstName", newCustomer.FirstName));
+                    cmd.Parameters.Add(new SqlParameter("@LastName", newCustomer.LastName));
+
+                    int newId = (int)cmd.ExecuteScalar();
+                    newCustomer.Id = newId;
+                    return CreatedAtRoute("GetCustomer", new { id = newId }, newCustomer);
+
+                }
+            }
         }
 
         // PUT: api/Customer/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] Customer customer)
         {
+            using (SqlConnection conn = Connection)
+
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Customer 
+                                        SET FirstName = @FirstName, LastName = @LastName
+                                        WHERE id = @id;";
+                    cmd.Parameters.Add(new SqlParameter("@FirstName", customer.FirstName));
+                    cmd.Parameters.Add(new SqlParameter("@LastName", customer.LastName));
+                    cmd.Parameters.Add(new SqlParameter("@id", id));
+                    cmd.ExecuteNonQuery();
+                    return NoContent();
+                }
+            }
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Customer WHERE id = @id;";
+                    cmd.Parameters.Add(new SqlParameter("@id", id));
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
