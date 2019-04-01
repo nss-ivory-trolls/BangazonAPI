@@ -11,6 +11,7 @@ namespace BangazonAPI.Models
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int MaxAttendees { get; set; }    
+        public int MaxAttendees { get; set; }
+        public List<Employee> EmployeeList { get; set; } = new List<Employee>();
     }
 }
