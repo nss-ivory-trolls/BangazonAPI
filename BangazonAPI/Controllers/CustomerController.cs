@@ -304,22 +304,6 @@ namespace BangazonAPI.Controllers
                     return NoContent();
                 }
             }
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            using (SqlConnection conn = Connection)
-            {
-                conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "DELETE FROM Customer WHERE id = @id;";
-                    cmd.Parameters.Add(new SqlParameter("@id", id));
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
+        }        
     }
 }
