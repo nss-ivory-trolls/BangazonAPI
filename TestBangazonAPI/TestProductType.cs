@@ -29,76 +29,91 @@ namespace BangazonAPI.Tests
             }
         }
 
-        /*[Fact]
-        public async Task Test_Post_Cohort()
+        [Fact]
+        public async Task Test_Get_ProductType_By_Id()
         {
             using (var client = new APIClientProvider().Client)
             {
-                Cohort cohort = new Cohort
+                var response = await client.GetAsync("api/producttype/1");
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                var productType = JsonConvert.DeserializeObject<ProductType>(responseBody);
+
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.NotNull(productType.Name);
+            }
+        }
+
+        [Fact]
+        public async Task Test_Post_ProductType()
+        {
+            using (var client = new APIClientProvider().Client)
+            {
+                ProductType productType = new ProductType
                 {
-                    Name = "Cohort 100"
+                    Name = "Clothing"
                 };
 
-                var cohortJson = JsonConvert.SerializeObject(cohort);
+                var productTypeJson = JsonConvert.SerializeObject(productType);
 
                 var response = await client.PostAsync(
-                    "/api/cohorts",
-                    new StringContent(cohortJson, Encoding.UTF8, "application/json")
+                    "/api/producttype",
+                    new StringContent(productTypeJson, Encoding.UTF8, "application/json")
                 );
 
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                var newCohort = JsonConvert.DeserializeObject<Cohort>(responseBody);
+                var newProductType = JsonConvert.DeserializeObject<ProductType>(responseBody);
 
 
                 Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-                Assert.Equal(cohort.Name, newCohort.Name);
+                Assert.Equal(productType.Name, newProductType.Name);
             }
         }
 
         [Fact]
-        public async Task Test_Put_Cohort()
+        public async Task Test_Put_ProductType()
         {
-            string name = "Cohort 101";
+            string name = "Food";
             using (var client = new APIClientProvider().Client)
             {
-                Cohort modifiedCohort = new Cohort
+                ProductType modifiedProductType = new ProductType
                 {
                     Name = name
                 };
-                var cohortJson = JsonConvert.SerializeObject(modifiedCohort);
+                var productTypeJson = JsonConvert.SerializeObject(modifiedProductType);
 
                 var response = await client.PutAsync(
-                    "/api/cohorts/4",
-                    new StringContent(cohortJson, Encoding.UTF8, "application/json")
+                    "/api/producttype/5",
+                    new StringContent(productTypeJson, Encoding.UTF8, "application/json")
                 );
 
                 string responseBody = await response.Content.ReadAsStringAsync();
 
                 Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 
-                var getCohort = await client.GetAsync("/api/cohorts/4");
-                getCohort.EnsureSuccessStatusCode();
+                var getProductType = await client.GetAsync("/api/producttype/5");
+                getProductType.EnsureSuccessStatusCode();
 
-                string getCohortBody = await getCohort.Content.ReadAsStringAsync();
-                Cohort newCohort = JsonConvert.DeserializeObject<Cohort>(getCohortBody);
+                string getProductTypeBody = await getProductType.Content.ReadAsStringAsync();
+                ProductType newProductType = JsonConvert.DeserializeObject<ProductType>(getProductTypeBody);
 
-                Assert.Equal(HttpStatusCode.OK, getCohort.StatusCode);
-                Assert.Equal(name, newCohort.Name);
+                Assert.Equal(HttpStatusCode.OK, getProductType.StatusCode);
+                Assert.Equal(name, newProductType.Name);
             }
         }
 
         [Fact]
-        public async Task Test_Delete_Cohort()
+        public async Task Test_Delete_ProductType()
         {
 
             using (var client = new APIClientProvider().Client)
             {
-                var response = await client.DeleteAsync("/api/cohorts/4");
-
+                var response = await client.DeleteAsync("/api/producttype/5");
 
                 Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
             }
-        }*/
+        }
     }
 }
