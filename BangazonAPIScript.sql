@@ -160,7 +160,7 @@ insert into PaymentType (AcctNumber, [Name], CustomerId) values (3000, 'AmEx', 3
 
 insert into [Order] (CustomerId, PaymentTypeId) values (1, 1)
 insert into [Order] (CustomerId, PaymentTypeId) values (2, 2)
-insert into [Order] (CustomerId, PaymentTypeId) values (3, 3)
+insert into [Order] (CustomerId) values (3)
 
 insert into ProductType ([Name]) values ('Electronics')
 insert into ProductType ([Name]) values ('Sports Equipment')
