@@ -7,6 +7,7 @@ namespace BangazonAPI.Models
 {
     public class PaymentType
     {
+
         public int Id { get; set; }
 
         public string Name {get; set;}
@@ -16,5 +17,6 @@ namespace BangazonAPI.Models
         public int CustomerId { get; set; }
 
         public Customer Customer { get; set; }
+
     }
 }
