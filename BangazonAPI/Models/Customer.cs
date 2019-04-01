@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BangazonAPI.Models
 {
-    public class Class
+    public class Customer
     {
     }
 }
