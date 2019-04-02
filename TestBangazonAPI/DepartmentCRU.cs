@@ -19,9 +19,9 @@ namespace TestBangazonAPI
             {
                 var response = await client.GetAsync("/api/department");
                 string responseBody = await response.Content.ReadAsStringAsync();
-                var CustomerList = JsonConvert.DeserializeObject<List<Department>>(responseBody);
+                var DepartmentList = JsonConvert.DeserializeObject<List<Department>>(responseBody);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                Assert.True(CustomerList.Count > 0);
+                Assert.True(DepartmentList.Count > 0);
             }
 
         }
