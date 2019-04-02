@@ -61,6 +61,7 @@ namespace BangazonAPI.Controllers
                     {
                         Employee newEmployee = new Employee
                         {
+                             
                             Id = reader.GetInt32(reader.GetOrdinal("EmployeeId")),
                             FirstName = reader.GetString(reader.GetOrdinal("EmployeeFirstName")),
                             LastName = reader.GetString(reader.GetOrdinal("EmployeeLastName")),
@@ -71,26 +72,33 @@ namespace BangazonAPI.Controllers
                                 Id = reader.GetInt32(reader.GetOrdinal("DepartmentId")),
                                 Name = reader.GetString(reader.GetOrdinal("DepartmentName"))
 
-                            },
-                            ComputerId = reader.GetInt32(reader.GetOrdinal("ComputerId")),
-                            Computer = new Computer
+                            }
+                        };
+
+
+                        if (!reader.IsDBNull(reader.GetOrdinal("ComputerId")))
+                        {
+                            newEmployee.ComputerId = reader.GetInt32(reader.GetOrdinal("ComputerId"));
+                            newEmployee.Computer = new Computer
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("ComputerId")),
                                 PurchaseDate = reader.GetDateTime(reader.GetOrdinal("ComputerPurchaseDate")),
                                 DecomissionDate = reader.IsDBNull(reader.GetOrdinal("ComputerDecomissionDate")) ? (DateTime?)null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("ComputerDecomissionDate")),
                                 Make = reader.GetString(reader.GetOrdinal("ComputerMake")),
                                 Manufacturer = reader.GetString(reader.GetOrdinal("ComputerManufacturer"))
-                            }
+                            };
 
-                        };
+                        }
+
                         employees.Add(newEmployee);
-                    }
+                    };
                     reader.Close();
                     return employees;
+                    }
 
                 }
             }
-        }
+        
 
         // GET: api/Employee/5
         [HttpGet("{id}", Name = "GetEmployee")]
@@ -121,7 +129,8 @@ namespace BangazonAPI.Controllers
                     cmd.Parameters.Add(new SqlParameter("@id", id));
                     SqlDataReader reader = cmd.ExecuteReader();
                     Employee employee = null;
-                    while(reader.Read())
+                    while (reader.Read())
+
                     {
                         employee = new Employee
                         {
@@ -135,18 +144,24 @@ namespace BangazonAPI.Controllers
                                 Id = reader.GetInt32(reader.GetOrdinal("DepartmentId")),
                                 Name = reader.GetString(reader.GetOrdinal("DepartmentName"))
 
-                            },
-                            ComputerId = reader.GetInt32(reader.GetOrdinal("ComputerId")),
-                            Computer = new Computer
+                            }
+                        };
+
+
+                    if (!reader.IsDBNull(reader.GetOrdinal("ComputerId")))
+                    {
+                            employee.ComputerId = reader.GetInt32(reader.GetOrdinal("ComputerId"));
+                            employee.Computer = new Computer
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("ComputerId")),
                                 PurchaseDate = reader.GetDateTime(reader.GetOrdinal("ComputerPurchaseDate")),
                                 DecomissionDate = reader.IsDBNull(reader.GetOrdinal("ComputerDecomissionDate")) ? (DateTime?)null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("ComputerDecomissionDate")),
                                 Make = reader.GetString(reader.GetOrdinal("ComputerMake")),
                                 Manufacturer = reader.GetString(reader.GetOrdinal("ComputerManufacturer"))
-                            }
+                            };
 
-                        };
+                    }
+                
                     }
                     reader.Close();
                     return Ok(employee);
