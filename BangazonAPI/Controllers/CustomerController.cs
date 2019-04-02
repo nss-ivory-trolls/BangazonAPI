@@ -14,11 +14,13 @@ namespace BangazonAPI.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly IConfiguration configuration; 
+
+        private readonly IConfiguration configuration;
 
         public CustomerController(IConfiguration configuration)
         {
-            this.configuration = configuration; 
+            this.configuration = configuration;
+
         }
 
         public SqlConnection Connection
@@ -26,7 +28,7 @@ namespace BangazonAPI.Controllers
             get
             {
                 return new SqlConnection(configuration.GetConnectionString("DefaultConnection"));
-                
+
             }
         }
 
@@ -39,8 +41,10 @@ namespace BangazonAPI.Controllers
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-   
-                     if (_include == "products")
+
+
+                    if (_include == "products")
+
                     {
                         cmd.CommandText = @"select c.id as CustomerId,
                                             c.FirstName as FirstName,
@@ -76,72 +80,79 @@ namespace BangazonAPI.Controllers
                                             WHERE 1 = 1";
                     }
 
-                    if(!string.IsNullOrWhiteSpace(q))
-                    {
+
+                    if (!string.IsNullOrWhiteSpace(q)) { 
+
                         cmd.CommandText += @" AND 
                                                 (c.FirstName LIKE @q OR
                                                  c.LastName LIKE @q)";
-                        cmd.Parameters.Add(new SqlParameter("@q", $"%{q}%"));
-                    }
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    Dictionary<int, Customer> customers = new Dictionary<int, Customer>();
-                    while (reader.Read())
-                    {
-                        int CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
-                        if(!customers.ContainsKey(CustomerId))
-                        {
-                            Customer newCustomer = new Customer
-                            {
-                                Id = CustomerId,
-                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                                LastName = reader.GetString(reader.GetOrdinal("LastName"))
-                            };
-                            customers.Add(CustomerId, newCustomer);
-                        }
-                        if (_include == "products")
-                        {
-                            if(!reader.IsDBNull(reader.GetOrdinal("ProductId")))
-                            {
-                                Customer currentCustomer = customers[CustomerId];
-                                currentCustomer.ProductList.Add(
-                                    new Product
-                                    {
-                                        Id = reader.GetInt32(reader.GetOrdinal("ProductId")),
-                                        ProductTypeId = reader.GetInt32(reader.GetOrdinal("ProductTypeId")),
-                                        Title = reader.GetString(reader.GetOrdinal("Title")),
-                                        Price = reader.GetInt32(reader.GetOrdinal("Price")),
-                                        Description = reader.GetString(reader.GetOrdinal("Description")),
-                                        Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
-                                        CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"))
-                                    }
-                                    );
-                            }
-                        }
-                  
-                        if (_include == "payments")
-                        {
-                            if (!reader.IsDBNull(reader.GetOrdinal("PaymentTypeId")))
-                            {
-                                Customer currentCustomer = customers[CustomerId];
-                                currentCustomer.PaymentTypeList.Add(
-                                    new PaymentType
-                                    {
-                                        Id = reader.GetInt32(reader.GetOrdinal("PaymentTypeId")),
-                                        Name = reader.GetString(reader.GetOrdinal("PaymentName")),
-                                        AcctNumber = reader.GetInt32(reader.GetOrdinal("AccountNumber")),
-                                        CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"))
-                                    }
-                                    );
-                            }
-                        }                      
-                    }
-                    reader.Close();
-                    return customers.Values.ToList();
+                    cmd.Parameters.Add(new SqlParameter("@q", $"%{q}%"));
                 }
-               
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                Dictionary<int, Customer> customers = new Dictionary<int, Customer>();
+                while (reader.Read())
+                {
+                    int CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
+
+                    if (!customers.ContainsKey(CustomerId))
+
+                    {
+                        Customer newCustomer = new Customer
+                        {
+                            Id = CustomerId,
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName"))
+                        };
+                        customers.Add(CustomerId, newCustomer);
+                    }
+                    if (_include == "products")
+                    {
+
+                        if (!reader.IsDBNull(reader.GetOrdinal("ProductId")))
+
+                        {
+                            Customer currentCustomer = customers[CustomerId];
+                            currentCustomer.ProductList.Add(
+                                new Product
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("ProductId")),
+                                    ProductTypeId = reader.GetInt32(reader.GetOrdinal("ProductTypeId")),
+                                    Title = reader.GetString(reader.GetOrdinal("Title")),
+                                    Price = reader.GetInt32(reader.GetOrdinal("Price")),
+                                    Description = reader.GetString(reader.GetOrdinal("Description")),
+                                    Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
+                                    CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"))
+                                }
+                                );
+                        }
+                    }
+
+                    if (_include == "payments")
+                    {
+                        if (!reader.IsDBNull(reader.GetOrdinal("PaymentTypeId")))
+                        {
+                            Customer currentCustomer = customers[CustomerId];
+                            currentCustomer.PaymentTypeList.Add(
+                                new PaymentType
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("PaymentTypeId")),
+                                    Name = reader.GetString(reader.GetOrdinal("PaymentName")),
+                                    AcctNumber = reader.GetInt32(reader.GetOrdinal("AccountNumber")),
+                                    CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"))
+                                }
+                                );
+                        }
+
+                    }
+
+                }
+                reader.Close();
+                return customers.Values.ToList();
             }
+
         }
+
 
         // GET: api/Customer/5
         [HttpGet("{id}", Name = "GetCustomer")]
@@ -203,14 +214,16 @@ namespace BangazonAPI.Controllers
                     Customer customer = null;
                     while (reader.Read())
                     {
-                           
+
+
 
                         customer = new Customer
-                       {
-                           Id = reader.GetInt32(reader.GetOrdinal("CustomerId")),
-                           FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                           LastName = reader.GetString(reader.GetOrdinal("LastName"))
-                       };
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("CustomerId")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName"))
+                        };
+
 
                         if (_include == "products")
                         {
@@ -230,7 +243,10 @@ namespace BangazonAPI.Controllers
                                         CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"))
                                     }
                                 );
+
                                 }                              
+
+  
                             }
                         }
 
@@ -255,12 +271,17 @@ namespace BangazonAPI.Controllers
                             }
                         }
                     }
+
                     reader.Close();                    
                     return Ok(customer);
                 }                   
             }
         }
         
+
+ 
+
+
         // POST: api/Customer
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Customer newCustomer)
@@ -304,6 +325,10 @@ namespace BangazonAPI.Controllers
                     return NoContent();
                 }
             }
+
         }        
-    }
+
+        }
+
+    
 }
