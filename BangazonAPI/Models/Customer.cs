@@ -15,6 +15,9 @@ namespace BangazonAPI.Models
 
         public List<Product> ProductList { get; set; } = new List<Product>();
 
+
         public List<PaymentType> PaymentTypeList { get; set; } = new List<PaymentType>();
+
+
     }
 }
