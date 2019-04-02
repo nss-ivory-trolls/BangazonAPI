@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Ashwin
+
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -109,7 +111,9 @@ namespace BangazonAPI.Controllers
                     {
                         cmd.CommandText = $@"select pt.Id as ptId, pt.AcctNumber, pt.[Name], pt.CustomerId, c.Id as cId, c.FirstName, c.LastName
                                             from PaymentType pt
-                                            left join Customer c on pt.CustomerId = c.Id";
+                                            left join Customer c on pt.CustomerId = c.Id
+                                            WHERE pt.Id = @id";
+                        cmd.Parameters.Add(new SqlParameter("@id", id));
                         SqlDataReader reader = cmd.ExecuteReader();
                         PaymentType paymentType = null;
 
@@ -139,7 +143,9 @@ namespace BangazonAPI.Controllers
                     else
                     {
                         cmd.CommandText = $@"select pt.Id as ptId, pt.AcctNumber, pt.[Name], pt.CustomerId
-                                            from PaymentType pt";
+                                            from PaymentType pt  WHERE pt.Id = @id";
+                        cmd.Parameters.Add(new SqlParameter("@id", id));
+
                         SqlDataReader reader = cmd.ExecuteReader();
                         PaymentType paymentType = null;
 
