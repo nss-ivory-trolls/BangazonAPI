@@ -1,5 +1,5 @@
 ﻿using BangazonAPI.Models;
-using BangazonAPI.Tests;
+using TestBangazonAPI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace BangazonAPI.Tests
+namespace TestBangazonAPI
 {
     public class TestProduct
     {

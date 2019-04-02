@@ -186,7 +186,7 @@ namespace BangazonAPI.Controllers
             }
         }
 
-        //Delete an employee's computer entry
+        //Delete an employee's computer instance
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployeeComputer([FromRoute] int id)
         {
