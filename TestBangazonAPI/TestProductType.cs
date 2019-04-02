@@ -85,7 +85,7 @@ namespace BangazonAPI.Tests
                 var productTypeJson = JsonConvert.SerializeObject(modifiedProductType);
 
                 var response = await client.PutAsync(
-                    "/api/producttype/5",
+                    "/api/producttype/4",
                     new StringContent(productTypeJson, Encoding.UTF8, "application/json")
                 );
 
@@ -93,7 +93,7 @@ namespace BangazonAPI.Tests
 
                 Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 
-                var getProductType = await client.GetAsync("/api/producttype/5");
+                var getProductType = await client.GetAsync("/api/producttype/4");
                 getProductType.EnsureSuccessStatusCode();
 
                 string getProductTypeBody = await getProductType.Content.ReadAsStringAsync();
@@ -110,7 +110,7 @@ namespace BangazonAPI.Tests
 
             using (var client = new APIClientProvider().Client)
             {
-                var response = await client.DeleteAsync("/api/producttype/5");
+                var response = await client.DeleteAsync("/api/producttype/4");
 
                 Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
             }
