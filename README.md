@@ -2,6 +2,16 @@
 ---
 Welcome to Bangazon! The new virtual marketplace. This marketplace allows customers to buy and sell products through a single page application web page built in React. The application's data is tracked through a powerful, hand-crafted API built in C#/ADO.Net
 
+Before beginning please follow these steps:
+- Navigate your host file 
+
+- Windows - SystemRoot > system32 > drivers > etc > hosts
+By default the system root is C:\Windows, so if you are using Windows, your hosts file is most probably: C:\Windows\System32\drivers\etc\hosts)
+- Linux - /etc/hosts
+- Mac OS X - /private/etc/hosts
+
+at the end of your host file insert your IP address followed by : bangazon.com
+
 ## Software Requirements
 ---
 Sql Server Manangment Studio 

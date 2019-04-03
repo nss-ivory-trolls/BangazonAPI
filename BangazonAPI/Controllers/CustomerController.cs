@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using BangazonAPI.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,7 @@ namespace BangazonAPI.Controllers
         }
 
         // GET: api/Customers
+       
         [HttpGet]
         public IEnumerable<Customer> Get(string _include, string q, string active)
         {
