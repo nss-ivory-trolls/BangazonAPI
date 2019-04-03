@@ -58,11 +58,11 @@ namespace TestBangazonAPI
                     Manufacturer = "Dell"
                 };
 
-                var productJson = JsonConvert.SerializeObject(computer);
+                var computerJson = JsonConvert.SerializeObject(computer);
 
                 var response = await client.PostAsync(
                     "/api/computer",
-                    new StringContent(productJson, Encoding.UTF8, "application/json")
+                    new StringContent(computerJson, Encoding.UTF8, "application/json")
                 );
 
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -81,23 +81,21 @@ namespace TestBangazonAPI
         [Fact]
         public async Task Test_Put_Computer()
         {
-            string title = "iPhone X";
+            string make = "XPS 13";
             using (var client = new APIClientProvider().Client)
             {
-                Product modifiedProduct = new Product
+                Computer modifiedComputer = new Computer
                 {
-                    ProductTypeId = 1,
-                    Title = title,
-                    Price = 1000,
-                    Description = "It's an iPhone",
-                    Quantity = 100,
-                    CustomerId = 1
+                    PurchaseDate = new DateTime(2019, 1, 1),
+                    DecomissionDate = new DateTime(2019, 1, 2),
+                    Make = make,
+                    Manufacturer = "Dell"
                 };
-                var productJson = JsonConvert.SerializeObject(modifiedProduct);
+                var computerJson = JsonConvert.SerializeObject(modifiedComputer);
 
                 var response = await client.PutAsync(
-                    "/api/product/4",
-                    new StringContent(productJson, Encoding.UTF8, "application/json")
+                    "/api/computer/4",
+                    new StringContent(computerJson, Encoding.UTF8, "application/json")
                 );
 
                 string responseBody = await response.Content.ReadAsStringAsync();
