@@ -113,7 +113,7 @@ namespace TestBangazonAPI
         }
 
         [Fact]
-        public async Task Test_Modify_Payment()
+        public async Task Test_Modify_Order()
         {
 
             using (var client = new APIClientProvider().Client)

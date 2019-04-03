@@ -175,6 +175,8 @@ insert into TrainingProgram ([Name], StartDate, EndDate, MaxAttendees) values ('
 insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (1, 1)
 insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (2, 2)
 insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (3, 3)
+insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (3, 4)
+
 
 insert into OrderProduct (OrderId, ProductId) values (1, 1)
 insert into OrderProduct (OrderId, ProductId) values (2, 2)
