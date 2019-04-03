@@ -20,11 +20,11 @@
     "BangazonAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/order",
+      "launchUrl": "api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5000"
+      "applicationUrl": "http://bangazon.com"
     }
   }
 }

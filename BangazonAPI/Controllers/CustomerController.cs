@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using BangazonAPI.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,7 @@ namespace BangazonAPI.Controllers
         }
 
         // GET: api/Customers
+        [EnableCors]
         [HttpGet]
         public IEnumerable<Customer> Get(string _include, string q)
         {
@@ -81,76 +83,78 @@ namespace BangazonAPI.Controllers
                     }
 
 
-                    if (!string.IsNullOrWhiteSpace(q)) { 
+                    if (!string.IsNullOrWhiteSpace(q))
+                    {
 
                         cmd.CommandText += @" AND 
                                                 (c.FirstName LIKE @q OR
                                                  c.LastName LIKE @q)";
-                    cmd.Parameters.Add(new SqlParameter("@q", $"%{q}%"));
-                }
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                Dictionary<int, Customer> customers = new Dictionary<int, Customer>();
-                while (reader.Read())
-                {
-                    int CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
-
-                    if (!customers.ContainsKey(CustomerId))
-
-                    {
-                        Customer newCustomer = new Customer
-                        {
-                            Id = CustomerId,
-                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                            LastName = reader.GetString(reader.GetOrdinal("LastName"))
-                        };
-                        customers.Add(CustomerId, newCustomer);
+                        cmd.Parameters.Add(new SqlParameter("@q", $"%{q}%"));
                     }
-                    if (_include == "products")
-                    {
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-                        if (!reader.IsDBNull(reader.GetOrdinal("ProductId")))
+                    Dictionary<int, Customer> customers = new Dictionary<int, Customer>();
+                    while (reader.Read())
+                    {
+                        int CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"));
+
+                        if (!customers.ContainsKey(CustomerId))
 
                         {
-                            Customer currentCustomer = customers[CustomerId];
-                            currentCustomer.ProductList.Add(
-                                new Product
-                                {
-                                    Id = reader.GetInt32(reader.GetOrdinal("ProductId")),
-                                    ProductTypeId = reader.GetInt32(reader.GetOrdinal("ProductTypeId")),
-                                    Title = reader.GetString(reader.GetOrdinal("Title")),
-                                    Price = reader.GetInt32(reader.GetOrdinal("Price")),
-                                    Description = reader.GetString(reader.GetOrdinal("Description")),
-                                    Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
-                                    CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"))
-                                }
-                                );
+                            Customer newCustomer = new Customer
+                            {
+                                Id = CustomerId,
+                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                                LastName = reader.GetString(reader.GetOrdinal("LastName"))
+                            };
+                            customers.Add(CustomerId, newCustomer);
                         }
-                    }
-
-                    if (_include == "payments")
-                    {
-                        if (!reader.IsDBNull(reader.GetOrdinal("PaymentTypeId")))
+                        if (_include == "products")
                         {
-                            Customer currentCustomer = customers[CustomerId];
-                            currentCustomer.PaymentTypeList.Add(
-                                new PaymentType
-                                {
-                                    Id = reader.GetInt32(reader.GetOrdinal("PaymentTypeId")),
-                                    Name = reader.GetString(reader.GetOrdinal("PaymentName")),
-                                    AcctNumber = reader.GetInt32(reader.GetOrdinal("AccountNumber")),
-                                    CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"))
-                                }
-                                );
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("ProductId")))
+
+                            {
+                                Customer currentCustomer = customers[CustomerId];
+                                currentCustomer.ProductList.Add(
+                                    new Product
+                                    {
+                                        Id = reader.GetInt32(reader.GetOrdinal("ProductId")),
+                                        ProductTypeId = reader.GetInt32(reader.GetOrdinal("ProductTypeId")),
+                                        Title = reader.GetString(reader.GetOrdinal("Title")),
+                                        Price = reader.GetInt32(reader.GetOrdinal("Price")),
+                                        Description = reader.GetString(reader.GetOrdinal("Description")),
+                                        Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
+                                        CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"))
+                                    }
+                                    );
+                            }
                         }
 
-                    }
+                        if (_include == "payments")
+                        {
+                            if (!reader.IsDBNull(reader.GetOrdinal("PaymentTypeId")))
+                            {
+                                Customer currentCustomer = customers[CustomerId];
+                                currentCustomer.PaymentTypeList.Add(
+                                    new PaymentType
+                                    {
+                                        Id = reader.GetInt32(reader.GetOrdinal("PaymentTypeId")),
+                                        Name = reader.GetString(reader.GetOrdinal("PaymentName")),
+                                        AcctNumber = reader.GetInt32(reader.GetOrdinal("AccountNumber")),
+                                        CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId"))
+                                    }
+                                    );
+                            }
 
+                        }
+
+                    }
+                    reader.Close();
+                    return customers.Values.ToList();
                 }
-                reader.Close();
-                return customers.Values.ToList();
+
             }
-
         }
 
 
