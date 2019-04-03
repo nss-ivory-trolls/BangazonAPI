@@ -102,24 +102,24 @@ namespace TestBangazonAPI
 
                 Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 
-                var getProduct = await client.GetAsync("/api/product/4");
-                getProduct.EnsureSuccessStatusCode();
+                var getComputer = await client.GetAsync("/api/computer/4");
+                getComputer.EnsureSuccessStatusCode();
 
-                string getProductBody = await getProduct.Content.ReadAsStringAsync();
-                Product newProduct = JsonConvert.DeserializeObject<Product>(getProductBody);
+                string getComputerBody = await getComputer.Content.ReadAsStringAsync();
+                Computer newComputer = JsonConvert.DeserializeObject<Computer>(getComputerBody);
 
-                Assert.Equal(HttpStatusCode.OK, getProduct.StatusCode);
-                Assert.Equal(title, newProduct.Title);
+                Assert.Equal(HttpStatusCode.OK, getComputer.StatusCode);
+                Assert.Equal(make, newComputer.Make);
             }
         }
 
         [Fact]
-        public async Task Test_Delete_Product()
+        public async Task Test_Delete_Computer()
         {
 
             using (var client = new APIClientProvider().Client)
             {
-                var response = await client.DeleteAsync("/api/product/4");
+                var response = await client.DeleteAsync("/api/computer/4");
 
                 Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
             }
