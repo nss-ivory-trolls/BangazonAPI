@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BangazonAPI", "BangazonAPI\BangazonAPI.csproj", "{46DE50F5-A761-42A1-8B6C-9612481EC4B6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BangazonAPI.Tests", "TestBangazonAPI\BangazonAPI.Tests.csproj", "{DBE67B67-D3C6-40F2-B4B5-79C1ACCC044D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBangazonAPI", "TestBangazonAPI\TestBangazonAPI.csproj", "{DBE67B67-D3C6-40F2-B4B5-79C1ACCC044D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
