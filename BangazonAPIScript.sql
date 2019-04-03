@@ -12,19 +12,6 @@
 --DELETE FROM Customer;
 
 
---ALTER TABLE Employee DROP CONSTRAINT [FK_EmployeeDepartment];
---ALTER TABLE ComputerEmployee DROP CONSTRAINT [FK_ComputerEmployee_Employee];
---ALTER TABLE ComputerEmployee DROP CONSTRAINT [FK_ComputerEmployee_Computer];
---ALTER TABLE EmployeeTraining DROP CONSTRAINT [FK_EmployeeTraining_Employee];
---ALTER TABLE EmployeeTraining DROP CONSTRAINT [FK_EmployeeTraining_Training];
---ALTER TABLE Product DROP CONSTRAINT [FK_Product_ProductType];
---ALTER TABLE Product DROP CONSTRAINT [FK_Product_Customer];
---ALTER TABLE PaymentType DROP CONSTRAINT [FK_PaymentType_Customer];
---ALTER TABLE [Order] DROP CONSTRAINT [FK_Order_Customer];
---ALTER TABLE [Order] DROP CONSTRAINT [FK_Order_Payment];
---ALTER TABLE OrderProduct DROP CONSTRAINT [FK_OrderProduct_Product];
---ALTER TABLE OrderProduct DROP CONSTRAINT [FK_OrderProduct_Order];
-
 
 DROP TABLE IF EXISTS OrderProduct;
 DROP TABLE IF EXISTS ComputerEmployee;
@@ -153,14 +140,20 @@ insert into Employee (FirstName, LastName, DepartmentId, IsSuperVisor)  values (
 insert into Customer (FirstName, LastName) values ('Fred', 'Flinstone')
 insert into Customer (FirstName, LastName) values ('Barney', 'Rubble')
 insert into Customer (FirstName, LastName) values ('George', 'Jetson')
+insert into Customer (FirstName, LastName) values ('Harry', 'Reed')
+
 
 insert into PaymentType (AcctNumber, [Name], CustomerId) values (1000, 'Visa', 1)
 insert into PaymentType (AcctNumber, [Name], CustomerId) values (2000, 'MasterCard', 2)
 insert into PaymentType (AcctNumber, [Name], CustomerId) values (3000, 'AmEx', 3)
+insert into PaymentType (AcctNumber, [Name], CustomerId) values (4000, 'Bank', 4)
+insert into PaymentType (AcctNumber, [Name], CustomerId) values (5000, 'Bank', 4)
+
+
 
 insert into [Order] (CustomerId, PaymentTypeId) values (1, 1)
 insert into [Order] (CustomerId, PaymentTypeId) values (2, 2)
-insert into [Order] (CustomerId, PaymentTypeId) values (3, 3)
+insert into [Order] (CustomerId) values (3)
 
 insert into ProductType ([Name]) values ('Electronics')
 insert into ProductType ([Name]) values ('Sports Equipment')
@@ -184,4 +177,18 @@ insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (3, 3)
 
 insert into OrderProduct (OrderId, ProductId) values (1, 1)
 insert into OrderProduct (OrderId, ProductId) values (2, 2)
+insert into OrderProduct (OrderId, ProductId) values (2, 2)
 insert into OrderProduct (OrderId, ProductId) values (3, 3)
+
+ALTER TABLE Employee DROP CONSTRAINT [FK_EmployeeDepartment];
+ALTER TABLE ComputerEmployee DROP CONSTRAINT [FK_ComputerEmployee_Employee];
+ALTER TABLE ComputerEmployee DROP CONSTRAINT [FK_ComputerEmployee_Computer];
+ALTER TABLE EmployeeTraining DROP CONSTRAINT [FK_EmployeeTraining_Employee];
+ALTER TABLE EmployeeTraining DROP CONSTRAINT [FK_EmployeeTraining_Training];
+ALTER TABLE Product DROP CONSTRAINT [FK_Product_ProductType];
+ALTER TABLE Product DROP CONSTRAINT [FK_Product_Customer];
+ALTER TABLE PaymentType DROP CONSTRAINT [FK_PaymentType_Customer];
+ALTER TABLE [Order] DROP CONSTRAINT [FK_Order_Customer];
+ALTER TABLE [Order] DROP CONSTRAINT [FK_Order_Payment];
+ALTER TABLE OrderProduct DROP CONSTRAINT [FK_OrderProduct_Product];
+ALTER TABLE OrderProduct DROP CONSTRAINT [FK_OrderProduct_Order];
