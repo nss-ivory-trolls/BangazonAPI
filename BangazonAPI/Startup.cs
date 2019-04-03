@@ -42,8 +42,8 @@ namespace BangazonAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
             app.UseCors("AllowAllHeaders");
+            app.UseMvc();
             
         }
     }
