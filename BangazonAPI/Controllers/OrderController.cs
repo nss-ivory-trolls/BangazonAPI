@@ -391,7 +391,7 @@ namespace BangazonAPI.Controllers
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Order (CustomerId, PaymentTypeId)
+                    cmd.CommandText = @"INSERT INTO [Order] (CustomerId, PaymentTypeId)
                                         OUTPUT INSERTED.Id
                                         VALUES (@CustomerId, @PaymentTypeId)";
                     cmd.Parameters.Add(new SqlParameter("@CustomerId", order.CustomerId));
@@ -414,13 +414,13 @@ namespace BangazonAPI.Controllers
                     conn.Open();
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
-                        cmd.CommandText = @"UPDATE Order
+                        cmd.CommandText = @"UPDATE [Order]
                                             SET 
-                                                PaymentTypeId = @PaymentTypeId,
-                                                CustomerId = @CustomerId
+                                                CustomerId = @customerId,
+                                                PaymentTypeId = @paymentTypeId
                                                 WHERE Id = @id";
-                        cmd.Parameters.Add(new SqlParameter("@PaymentTypeId", order.PaymentTypeId));
-                        cmd.Parameters.Add(new SqlParameter("@CustomerId", order.CustomerId));
+                        cmd.Parameters.Add(new SqlParameter("@customerId", order.CustomerId));
+                        cmd.Parameters.Add(new SqlParameter("@paymentTypeId", order.PaymentTypeId));
                         cmd.Parameters.Add(new SqlParameter("@id", id));
 
                         int rowsAffected = cmd.ExecuteNonQuery();
@@ -456,7 +456,7 @@ namespace BangazonAPI.Controllers
                     conn.Open();
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
-                        cmd.CommandText = @"DELETE FROM Order WHERE Id = @id";
+                        cmd.CommandText = @"DELETE FROM [Order] WHERE Id = @id";
                         cmd.Parameters.Add(new SqlParameter("@id", id));
 
                         int rowsAffected = cmd.ExecuteNonQuery();
@@ -490,7 +490,7 @@ namespace BangazonAPI.Controllers
                 {
                     cmd.CommandText = @"
                         SELECT Id, CustomerId, PaymentTypeId
-                        FROM Order
+                        FROM [Order]
                         WHERE Id = @id";
                     cmd.Parameters.Add(new SqlParameter("@id", id));
 

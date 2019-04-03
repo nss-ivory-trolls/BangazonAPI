@@ -140,10 +140,16 @@ insert into Employee (FirstName, LastName, DepartmentId, IsSuperVisor)  values (
 insert into Customer (FirstName, LastName) values ('Fred', 'Flinstone')
 insert into Customer (FirstName, LastName) values ('Barney', 'Rubble')
 insert into Customer (FirstName, LastName) values ('George', 'Jetson')
+insert into Customer (FirstName, LastName) values ('Harry', 'Reed')
+
 
 insert into PaymentType (AcctNumber, [Name], CustomerId) values (1000, 'Visa', 1)
 insert into PaymentType (AcctNumber, [Name], CustomerId) values (2000, 'MasterCard', 2)
 insert into PaymentType (AcctNumber, [Name], CustomerId) values (3000, 'AmEx', 3)
+insert into PaymentType (AcctNumber, [Name], CustomerId) values (4000, 'Bank', 4)
+insert into PaymentType (AcctNumber, [Name], CustomerId) values (5000, 'Bank', 4)
+
+
 
 insert into [Order] (CustomerId, PaymentTypeId) values (1, 1)
 insert into [Order] (CustomerId, PaymentTypeId) values (2, 2)
