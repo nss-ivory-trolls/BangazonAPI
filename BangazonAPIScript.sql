@@ -167,13 +167,13 @@ insert into  ComputerEmployee (EmployeeId, ComputerId, AssignDate, UnassignDate)
 insert into  ComputerEmployee (EmployeeId, ComputerId, AssignDate, UnassignDate) values (2, 2, '01 Jan 2018', NULL)
 insert into  ComputerEmployee (EmployeeId, ComputerId, AssignDate, UnassignDate) values (3, 3, '01 Jan 2017', NULL)
 
-insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (1, 1)
-insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (2, 2)
-insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (3, 3)
-
 insert into TrainingProgram ([Name], StartDate, EndDate, MaxAttendees) values ('How to Count Beans', '14 Feb 2019', '15 Feb 2019', 10)
 insert into TrainingProgram ([Name], StartDate, EndDate, MaxAttendees) values ('How to Spell "IT"', '14 Feb 2019', '15 Feb 2019', 10)
 insert into TrainingProgram ([Name], StartDate, EndDate, MaxAttendees) values ('How to Sell Beans', '14 Feb 2019', '15 Feb 2019', 10)
+
+insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (1, 1)
+insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (2, 2)
+insert into EmployeeTraining (EmployeeId, TrainingProgramId) values (3, 3)
 
 insert into OrderProduct (OrderId, ProductId) values (1, 1)
 insert into OrderProduct (OrderId, ProductId) values (2, 2)
