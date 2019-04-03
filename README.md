@@ -1,3 +1,19 @@
+# BangazonAPI
+---
+Welcome to Bangazon! The new virtual marketplace. This marketplace allows customers to buy and sell products through a single page application web page built in React. The application's data is tracked through a powerful, hand-crafted API built in C#/ADO.Net
+
+## Software Requirements
+---
+Sql Server Manangment Studio 
+Visual Studio Community 2017 
+Google Chrome
+
+## Entity Relationship Diagram
+---
+![alt text](ERD.png "ERD")
+
+
+
 ## Http Request Methods
 ## 1. Customer
 Start the program by cd'ing into the BangazonAPI and using the command dotnet run. Once the program is running, open up the Postman desktop app and run the following commands:
