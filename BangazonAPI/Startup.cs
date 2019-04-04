@@ -28,7 +28,7 @@ namespace BangazonAPI
             services.AddCors(options => {
                 options.AddPolicy("AllowAllHeaders",
                     builder => {
-                        builder.WithOrigins("bangazon.com")
+                        builder.WithOrigins("http://bangazon.com", "http://bangazon.com:3000")
                             .AllowAnyHeader();
                     });
             });
@@ -42,8 +42,8 @@ namespace BangazonAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
             app.UseCors("AllowAllHeaders");
+            app.UseMvc();
             
         }
     }

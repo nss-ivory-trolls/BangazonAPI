@@ -34,7 +34,6 @@ namespace BangazonAPI.Controllers
         }
 
         // GET: api/Customers
-        [EnableCors]
         [HttpGet]
         public IEnumerable<Customer> Get(string _include, string q)
         {
