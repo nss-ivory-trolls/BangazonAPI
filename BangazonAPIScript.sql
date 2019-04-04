@@ -180,15 +180,15 @@ insert into OrderProduct (OrderId, ProductId) values (2, 2)
 insert into OrderProduct (OrderId, ProductId) values (2, 2)
 insert into OrderProduct (OrderId, ProductId) values (3, 3)
 
-ALTER TABLE Employee DROP CONSTRAINT [FK_EmployeeDepartment];
-ALTER TABLE ComputerEmployee DROP CONSTRAINT [FK_ComputerEmployee_Employee];
-ALTER TABLE ComputerEmployee DROP CONSTRAINT [FK_ComputerEmployee_Computer];
-ALTER TABLE EmployeeTraining DROP CONSTRAINT [FK_EmployeeTraining_Employee];
-ALTER TABLE EmployeeTraining DROP CONSTRAINT [FK_EmployeeTraining_Training];
-ALTER TABLE Product DROP CONSTRAINT [FK_Product_ProductType];
-ALTER TABLE Product DROP CONSTRAINT [FK_Product_Customer];
-ALTER TABLE PaymentType DROP CONSTRAINT [FK_PaymentType_Customer];
-ALTER TABLE [Order] DROP CONSTRAINT [FK_Order_Customer];
-ALTER TABLE [Order] DROP CONSTRAINT [FK_Order_Payment];
-ALTER TABLE OrderProduct DROP CONSTRAINT [FK_OrderProduct_Product];
-ALTER TABLE OrderProduct DROP CONSTRAINT [FK_OrderProduct_Order];
+--ALTER TABLE Employee DROP CONSTRAINT [FK_EmployeeDepartment];
+--ALTER TABLE ComputerEmployee DROP CONSTRAINT [FK_ComputerEmployee_Employee];
+--ALTER TABLE ComputerEmployee DROP CONSTRAINT [FK_ComputerEmployee_Computer];
+--ALTER TABLE EmployeeTraining DROP CONSTRAINT [FK_EmployeeTraining_Employee];
+--ALTER TABLE EmployeeTraining DROP CONSTRAINT [FK_EmployeeTraining_Training];
+--ALTER TABLE Product DROP CONSTRAINT [FK_Product_ProductType];
+--ALTER TABLE Product DROP CONSTRAINT [FK_Product_Customer];
+--ALTER TABLE PaymentType DROP CONSTRAINT [FK_PaymentType_Customer];
+--ALTER TABLE [Order] DROP CONSTRAINT [FK_Order_Customer];
+--ALTER TABLE [Order] DROP CONSTRAINT [FK_Order_Payment];
+--ALTER TABLE OrderProduct DROP CONSTRAINT [FK_OrderProduct_Product];
+--ALTER TABLE OrderProduct DROP CONSTRAINT [FK_OrderProduct_Order];

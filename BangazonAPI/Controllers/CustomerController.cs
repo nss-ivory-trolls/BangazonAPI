@@ -34,8 +34,9 @@ namespace BangazonAPI.Controllers
         }
 
         // GET: api/Customers
+       
         [HttpGet]
-        public IEnumerable<Customer> Get(string _include, string q)
+        public IEnumerable<Customer> Get(string _include, string q, string active)
         {
             using (SqlConnection conn = Connection)
             {
@@ -57,7 +58,7 @@ namespace BangazonAPI.Controllers
                                             p.Description as Description,
                                             p.Quantity as Quantity
                                             from Customer c
-                                            left join Product as p on c.id =                            p.CustomerId
+                                            left join Product as p on c.id = p.CustomerId
                                             WHERE 1 = 1 ";
                     }
                     else if (_include == "payments")
@@ -69,8 +70,17 @@ namespace BangazonAPI.Controllers
                                             pt.Name as PaymentName,
                                             pt.AcctNumber as AccountNumber
                                             from Customer c
-                                            left join PaymentType as pt on                            c.Id = pt.CustomerId
+                                            left join PaymentType as pt on c.Id = pt.CustomerId
                                             WHERE 1 = 1";
+                    }
+                    else if (active == "false")
+                    {
+                        cmd.CommandText = @"select c.id as CustomerId,
+                                            c.FirstName as FirstName,
+                                            c.LastName as LastName
+                                            from Customer c
+                                            left join [Order] o on c.Id = o.CustomerId
+	                                        WHERE o.CustomerId IS NULL";
                     }
                     else
                     {
