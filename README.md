@@ -1,6 +1,8 @@
 # BangazonAPI
 ---
-Welcome to Bangazon! The new virtual marketplace. This marketplace allows customers to buy and sell products through a single page application web page built in React. The application's data is tracked through a powerful, hand-crafted API built in C#/ADO.Net
+Welcome to Bangazon! The new virtual marketplace. This marketplace allows customers to buy and sell products through a single page application web page built in React. The application's data is tracked through a powerful, hand-crafted API built in C#/ADO.Net.
+
+Client side application: https://github.com/nss-ivory-trolls/BangazonClient
 
 Before beginning please follow these steps:
 - Navigate your host file 
