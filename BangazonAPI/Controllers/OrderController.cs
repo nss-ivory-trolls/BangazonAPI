@@ -112,6 +112,19 @@ namespace BangazonAPI.Controllers
 
                                 orders.Add(orderId, order);
                             }
+                            if (!reader.IsDBNull(reader.GetOrdinal("pId")))
+                            {
+                                Order currentOrder = orders[orderId];
+                                currentOrder.ProductList.Add(
+                                new Product
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("pId")),
+                                    Title = reader.GetString(reader.GetOrdinal("Title")),
+                                    Description = reader.GetString(reader.GetOrdinal("Description")),
+                                    Price = reader.GetInt32(reader.GetOrdinal("Price"))
+                                }
+                             );
+                            }
                         }
 
                         else if (_include == "products")
@@ -143,16 +156,31 @@ namespace BangazonAPI.Controllers
                         }
                         else if (completed == "false")
                         {
-                            if (!orders.ContainsKey(orderId))
+                            if (reader.IsDBNull(reader.GetOrdinal("PaymentTypeId")))
                             {
-                                if (reader.IsDBNull(reader.GetOrdinal("PaymentTypeId")))
+                                if (!orders.ContainsKey(orderId))
                                 {
+
                                     Order order = new Order
                                     {
                                         Id = orderId,
                                         CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId")),
+                                        ProductList = new List<Product>(),
                                     };
                                     orders.Add(orderId, order);
+                                }
+                                if (!reader.IsDBNull(reader.GetOrdinal("pId")))
+                                {
+                                    Order currentOrder = orders[orderId];
+                                    currentOrder.ProductList.Add(
+                                    new Product
+                                    {
+                                        Id = reader.GetInt32(reader.GetOrdinal("pId")),
+                                        Title = reader.GetString(reader.GetOrdinal("Title")),
+                                        Description = reader.GetString(reader.GetOrdinal("Description")),
+                                        Price = reader.GetInt32(reader.GetOrdinal("Price"))
+                                    }
+                                 );
                                 }
                             }
                         }
@@ -168,6 +196,7 @@ namespace BangazonAPI.Controllers
                                         Id = orderId,
                                         CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId")),
                                         PaymentTypeId = reader.GetInt32(reader.GetOrdinal("PaymentTypeId")),
+                                        ProductList = new List<Product>(),
                                     };
                                     orders.Add(orderId, order);
                                 }
@@ -178,9 +207,23 @@ namespace BangazonAPI.Controllers
                                     {
                                         Id = orderId,
                                         CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId")),
+                                        ProductList = new List<Product>(),
                                     };
                                     orders.Add(orderId, order);
                                 }
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("pId")))
+                            {
+                                Order currentOrder = orders[orderId];
+                                currentOrder.ProductList.Add(
+                                new Product
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("pId")),
+                                    Title = reader.GetString(reader.GetOrdinal("Title")),
+                                    Description = reader.GetString(reader.GetOrdinal("Description")),
+                                    Price = reader.GetInt32(reader.GetOrdinal("Price"))
+                                }
+                             );
                             }
                         }
 
@@ -220,7 +263,7 @@ namespace BangazonAPI.Controllers
                         SqlDataReader reader = cmd.ExecuteReader();
                         Dictionary<int, Order> orders = new Dictionary<int, Order>();
 
-                        if (reader.Read())
+                        while (reader.Read())
                         {
                             int orderId = reader.GetInt32(reader.GetOrdinal("oId"));
                             if (!reader.IsDBNull(reader.GetOrdinal("PaymentTypeId")))
@@ -241,6 +284,20 @@ namespace BangazonAPI.Controllers
                                 };
                                 orders.Add(orderId, order);
                             }
+                            if (!reader.IsDBNull(reader.GetOrdinal("pId")))
+                            {
+                                Order currentOrder = orders[orderId];
+                                currentOrder.ProductList.Add(
+                                new Product
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("pId")),
+                                    Title = reader.GetString(reader.GetOrdinal("Title")),
+                                    Description = reader.GetString(reader.GetOrdinal("Description")),
+                                    Price = reader.GetInt32(reader.GetOrdinal("Price"))
+                                }
+                             );
+                            }
+
                             if (reader.IsDBNull(reader.GetOrdinal("PaymentTypeId")))
                             {
                                 Order order = new Order
@@ -257,6 +314,19 @@ namespace BangazonAPI.Controllers
                                     ProductList = new List<Product>(),
                                 };
                                 orders.Add(orderId, order);
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("pId")))
+                            {
+                                Order currentOrder = orders[orderId];
+                                currentOrder.ProductList.Add(
+                                new Product
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("pId")),
+                                    Title = reader.GetString(reader.GetOrdinal("Title")),
+                                    Description = reader.GetString(reader.GetOrdinal("Description")),
+                                    Price = reader.GetInt32(reader.GetOrdinal("Price"))
+                                }
+                             );
                             }
 
                         };
@@ -314,6 +384,7 @@ namespace BangazonAPI.Controllers
                                     orders.Add(orderId, order);
                                 }
                             }
+
                             if (!reader.IsDBNull(reader.GetOrdinal("pId")))
                             {
                                 Order currentOrder = orders[orderId];
@@ -359,6 +430,8 @@ namespace BangazonAPI.Controllers
                                         Id = orderId,
                                         CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId")),
                                         PaymentTypeId = reader.GetInt32(reader.GetOrdinal("PaymentTypeId")),
+                                        ProductList = new List<Product>(),
+
                                     };
                                     orders.Add(orderId, order);
                                 }
@@ -369,9 +442,24 @@ namespace BangazonAPI.Controllers
                                     {
                                         Id = orderId,
                                         CustomerId = reader.GetInt32(reader.GetOrdinal("CustomerId")),
+                                        ProductList = new List<Product>(),
+
                                     };
                                     orders.Add(orderId, order);
                                 }
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("pId")))
+                            {
+                                Order currentOrder = orders[orderId];
+                                currentOrder.ProductList.Add(
+                                new Product
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("pId")),
+                                    Title = reader.GetString(reader.GetOrdinal("Title")),
+                                    Description = reader.GetString(reader.GetOrdinal("Description")),
+                                    Price = reader.GetInt32(reader.GetOrdinal("Price"))
+                                }
+                             );
                             }
                         }
                         reader.Close();
