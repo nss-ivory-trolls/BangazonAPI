@@ -107,3 +107,99 @@ To update an existing employee, select PUT then paste localhost:5000/employee/2 
 }
 ```
 You should get nothing back from this besides an OK status. When you run the GET query the employee you specified in your PUT query should show the updated, edited information you gave it.
+
+## 4. Product
+Use the command dotnet run to start the program, BangazonAPI. Once the program is running, open up the Postman desktop app and run the following commands for each request method:
+
+### GET
+To GET all products, select GET in Postman then paste localhost:5000/product into the field and click send. The result should be an array of all the Products in the database.
+
+- To GET a specific product, add an /{id} to the end of the localhost:5000/product URL. The result should only include the single product with the Id you added.
+
+### POST
+To POST a new object to your existing array for Product, select POST, then paste localhost:5000/product into the field. Then click Body underneath the field, select raw, and then paste this below snippet or make one similar then click send. The result should be the new Product you made.
+```
+    {
+        "productTypeId": 1,
+        "title": "Computer",
+        "price": 2000,
+        "description": "Dell XPS 13",
+        "quantity": 1,
+        "customerId": 1
+    }	
+```
+### PUT
+To update an existing product, select PUT then paste localhost:5000/product/2 or any other existing product. Then follow the same directions as the POST example, and change the values then click send:
+```
+    {
+        "productTypeId": 2,
+        "title": "Baseball Bat",
+        "price": 5,
+        "description": "Metal",
+        "quantity": 1,
+        "customerId": 2
+    }	
+```
+You should get nothing back from this besides an OK status. When you run the GET query the product you specified in your PUT query should show the updated, edited information you gave it.
+
+### DELETE
+To delete an existing product, select DELETE then paste localhost:5000/product/2 or any other existing product that you wish to delete. Click send and you should get back an OK status which will indicate that the product has been deleted from the database.
+
+## 5. Product Type
+Use the command dotnet run to start the program, BangazonAPI. Once the program is running, open up the Postman desktop app and run the following commands for each request method:
+
+### GET
+To GET all types of products, select GET in Postman then paste localhost:5000/producttype into the field and click send. The result should be an array of all the Product Types in the database.
+
+- To GET a specific type of product, add an /{id} to the end of the localhost:5000/producttype URL. The result should only include the single product type with the Id you added.
+
+### POST
+To POST a new object to your existing array for Product Type, select POST, then paste localhost:5000/producttype into the field. Then click Body underneath the field, select raw, and then paste this below snippet or make one similar then click send. The result should be the new Product Type you made.
+```
+    {
+        "name": "Clothes",
+    }	
+```
+### PUT
+To update an existing product type, select PUT then paste localhost:5000/producttype/2 or any other existing product type. Then follow the same directions as the POST example, and change the values then click send:
+```
+    {
+        "name": "Sports and Outdoors Equipment",
+    }	
+```
+You should get nothing back from this besides an OK status. When you run the GET query the product type you specified in your PUT query should show the updated, edited information you gave it.
+
+### DELETE
+To delete an existing product type, select DELETE then paste localhost:5000/producttype/2 or any other existing product type that you wish to delete. Click send and you should get back an OK status which will indicate that the product type has been deleted from the database.
+
+## 5. Computer
+Use the command dotnet run to start the program, BangazonAPI. Once the program is running, open up the Postman desktop app and run the following commands for each request method:
+
+### GET
+To GET all computers, select GET in Postman then paste localhost:5000/computer into the field and click send. The result should be an array of all the Computers in the database.
+
+- To GET a specific computer, add an /{id} to the end of the localhost:5000/computer URL. The result should only include the single computer with the Id you added.
+
+### POST
+To POST a new object to your existing array for Computer, select POST, then paste localhost:5000/computer into the field. Then click Body underneath the field, select raw, and then paste this below snippet or make one similar then click send. The result should be the new Computer you made.
+```
+{
+    "purchaseDate": "2019-01-01T00:00:00",
+    "make": "XPS 13",
+    "manufacturer": "Dell"
+}
+```
+### PUT
+To update an existing computer, select PUT then paste localhost:5000/computer/1 or any other existing computer. Then follow the same directions as the POST example, and change the values then click send:
+```
+{
+    "purchaseDate": "2019-01-01T00:00:00",
+    "decommissionDate": "2024-01-01T00:00:00",
+    "make": "MacBook Air",
+    "manufacturer": "Apple"
+}
+```
+You should get nothing back from this besides an OK status. When you run the GET query the product type you specified in your PUT query should show the updated, edited information you gave it.
+
+### DELETE
+To delete an existing computer, select DELETE then paste localhost:5000/computer/2 or any other existing computer that you wish to delete. Click send and you should get back an OK status which will indicate that the computer has been deleted from the database.
